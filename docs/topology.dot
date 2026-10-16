@@ -1,0 +1,49 @@
+graph topology {
+  graph [rankdir=TB, bgcolor="white", fontname="Helvetica", nodesep=0.45, ranksep=0.7, pad=0.4, newrank=true];
+  node  [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=11, color="#4a5a6a", fillcolor="#eef3f8", penwidth=1.2];
+  edge  [color="#4a5a6a", fontname="Helvetica", fontsize=9, penwidth=1.2];
+
+  subgraph cluster_private {
+    label="Private Network  (192.168.0.0 – 192.168.5.0)"; labeljust=l; fontsize=13; fontname="Helvetica-Bold";
+    style="rounded,dashed"; color="#7a8a9a";
+
+    R0 [label="Router0\nInter-VLAN routing · EIGRP · Dynamic NAT (PAT)\nFa1/0 192.168.0.1   Se2/0 129.137.10.1", fillcolor="#dbe8f5"];
+
+    subgraph cluster_dmz {
+      label="Services LAN / DMZ  192.168.0.0/24"; fontsize=11; fontname="Helvetica"; style="rounded"; color="#9aaaba";
+      SW4 [label="Switch4\n2960-24TT"];
+      SRV [label="Local Server  192.168.0.254\nDHCP · DNS · Email (networking.edu)", fillcolor="#fff3d6"];
+    }
+
+    SW3 [label="Switch3  (distribution)\n2960-24TT · trunks to access switches"];
+    SW0 [label="Switch0  (access)\nVLAN 10 Security · 20 IT · 30 H&R"];
+    SW1 [label="Switch1  (access)\nVLAN 10 Security · 40 Sales · 50 F&A"];
+
+    PC1 [label="Security PC\n192.168.1.0/24", fillcolor="#e9f5ea"];
+    PC2 [label="IT PC\n192.168.2.0/24", fillcolor="#e9f5ea"];
+    PC3 [label="H&R PC\n192.168.3.0/24", fillcolor="#e9f5ea"];
+    PC4 [label="Sales PC\n192.168.4.0/24", fillcolor="#e9f5ea"];
+    PC5 [label="F&A PC\n192.168.5.0/24", fillcolor="#e9f5ea"];
+    PC6 [label="Security PC (2)\n192.168.1.0/24", fillcolor="#e9f5ea"];
+  }
+
+  subgraph cluster_public {
+    label="Public Web Network  192.168.8.0/24"; labeljust=l; fontsize=13; fontname="Helvetica-Bold";
+    style="rounded,dashed"; color="#7a8a9a";
+    R1 [label="Router1\nEIGRP · Static NAT\nFa0/0 192.168.8.1   Se3/0 129.137.10.14", fillcolor="#dbe8f5"];
+    SW2 [label="Switch2\n2950-24"];
+    WEB [label="Public Web Server  192.168.8.254\nsoit.edu → NAT 129.137.10.13", fillcolor="#fff3d6"];
+  }
+
+  R0 -- R1 [label="  Serial WAN 129.137.10.0/28  ", color="#c0392b", penwidth=2, fontcolor="#c0392b", constraint=false];
+  R0 -- SW4 [label=" Fa1/0 "];
+  SW4 -- SRV;
+  R0 -- SW3 [label=" Fa0/0 trunk\n (802.1Q subinterfaces) ", style=dashed];
+  SW3 -- SW0 [label=" trunk 10,20,30 ", style=dashed];
+  SW3 -- SW1 [label=" trunk 10,40,50 ", style=dashed];
+  SW0 -- PC1; SW0 -- PC2; SW0 -- PC3;
+  SW1 -- PC4; SW1 -- PC5; SW1 -- PC6;
+  R1 -- SW2; SW2 -- WEB;
+
+  { rank=same; R0; R1; }
+}
