@@ -6,7 +6,7 @@
 ![NAT](https://img.shields.io/badge/NAT-Static%20%2B%20PAT-1BA0D7)
 ![Services](https://img.shields.io/badge/Services-DHCP%20%C2%B7%20DNS%20%C2%B7%20Email%20%C2%B7%20HTTP-5E5E5E)
 
-A networking project in which I designed, cabled, and configured a two-site network in Cisco Packet Tracer. A private campus network segments five departments into their own VLANs behind a router-on-a-stick, with a services LAN that hands out addresses, resolves names, and runs email. A separate public network hosts a web server. The two sites are joined by a serial WAN link running EIGRP, with dynamic NAT translating the private side out to the public addressing and static NAT publishing the web server. Everything was verified end to end: clients pick up their addressing over DHCP, send and receive email, and load the public site by name at `http://soit.edu`.
+A networking project from spring 2024 in which I designed, cabled, and configured a two-site network in Cisco Packet Tracer. A private campus network segments five departments into their own VLANs behind a router-on-a-stick, with a services LAN that hands out addresses, resolves names, and runs email. A separate public network hosts a web server. The two sites are joined by a serial WAN link running EIGRP, with dynamic NAT translating the private side out to the public addressing and static NAT publishing the web server. Everything was verified end to end: clients pick up their addressing over DHCP, send and receive email, and load the public site by name at `http://soit.edu`.
 
 The scenario is a fictional university **School of IT**, with an internal domain of `networking.edu` and a public site at `soit.edu`.
 
