@@ -1,0 +1,2 @@
+# Campus-Network-Build-VLANs-Inter-VLAN-Routing-EIGRP-NAT-and-Network-Services-in-Cisco-Packet-Tracer
+Two-site network built in Cisco Packet Tracer: five department VLANs behind a router-on-a-stick, a services LAN running DHCP, DNS, and email, and a public web server. Sites are linked over a serial WAN with EIGRP, dynamic NAT (PAT), and static NAT, verified end to end by clients loading the public site by name.
