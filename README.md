@@ -53,8 +53,6 @@ Five departments, Security, IT, H&R, Sales, and F&A, each live in their own VLAN
 | Local Server | Server-PT | DHCP, DNS, and email at 192.168.0.254 |
 | Public Web Server | Server-PT | HTTP site for `soit.edu` at 192.168.8.254 |
 
-The diagram above is generated from the project's actual device and link data; its source is in [`docs/topology.dot`](docs/topology.dot).
-
 ---
 
 ## Repository Structure
@@ -70,7 +68,6 @@ campus-network/
 │   ├── switch3-distribution.cfg
 │   └── switch4-server.cfg
 ├── docs/
-│   ├── topology.dot              # Graphviz source for the topology diagram
 │   └── images/
 └── README.md
 ```
